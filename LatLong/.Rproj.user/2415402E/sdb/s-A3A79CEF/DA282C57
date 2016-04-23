@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#### This script uses RCurl and RJSONIO to download data from Google's API:\n#### Latitude, longitude, location type (see explanation at the end), formatted address\n#### Notice ther is a limit of 2,500 calls per day\n\nlibrary(RCurl)\nlibrary(RJSONIO)\nlibrary(plyr)\n\nurl <- function(address, return.call = \"json\", sensor = \"false\") {\n  root <- \"http://maps.google.com/maps/api/geocode/\"\n  u <- paste(root, return.call, \"?address=\", address, \"&sensor=\", sensor, sep = \"\")\n  return(URLencode(u))\n}\n\ngeoCode <- function(address,verbose=FALSE) {\n  if(verbose) cat(address,\"\\n\")\n  u <- url(address)\n  doc <- getURL(u)\n  x <- fromJSON(doc,simplify = FALSE)\n  if(x$status==\"OK\") {\n    lat <- x$results[[1]]$geometry$location$lat\n    lng <- x$results[[1]]$geometry$location$lng\n    location_type <- x$results[[1]]$geometry$location_type\n    formatted_address <- x$results[[1]]$formatted_address\n    return(c(lat, lng, location_type, formatted_address))\n  } else {\n    return(c(NA,NA,NA, NA))\n  }\n}\n",
+    "created" : 1461440688204.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "145469523",
+    "id" : "DA282C57",
+    "lastKnownWriteTime" : 1461440721,
+    "last_content_update" : 1461440721015,
+    "path" : "~/LatLong/LatLong.R",
+    "project_path" : "LatLong.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

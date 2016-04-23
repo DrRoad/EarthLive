@@ -1,0 +1,9 @@
+{
+    "path" : "~/LatLong",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}
