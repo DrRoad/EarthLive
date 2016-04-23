@@ -6,7 +6,9 @@ Created on 23 Apr 2016
 from contextlib import closing
 
 import riak
-from enomad.common.indexs import RainfallRecordIndexFactory
+import sys
+import traceback
+from enomad.common.indexes import RainfallRecordIndexFactory
 
 RAINFALL_BUCKET = 'rainfall'
 
@@ -17,7 +19,7 @@ class RainfallDatabase(object):
     Stores the Rainfall records and performs the query to retrieve records
     
     '''
-    def __init__(self,riakHost='127.0.0.1', riakPort=8098):
+    def __init__(self, riakHost='127.0.0.1', riakPort=8098):
         """
         """
         self.riakClient = riak.RiakClient(host=riakHost, http_port=riakPort)
@@ -36,6 +38,8 @@ class RainfallDatabase(object):
             dataObject.indexes = indexes
             storedObject = dataObject.store(return_body=True)
         except Exception, e:
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            traceback.print_exception(exc_type, exc_value, exc_traceback)
             raise e
         return storedObject
         
@@ -56,19 +60,24 @@ class RainfallDatabase(object):
                 for key,term in index:
                     if self.locationFilter(term, latitude, longitude):
                         databaseObject = self.bucket.get(key)
-                        databaseObject.data
                         record = json.loads(databaseObject.data)
                         records.add(record)
 
         except Exception, e:
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            traceback.print_exception(exc_type, exc_value, exc_traceback)
             raise e
 
         return records
 
-    def locationFilter(term, latitude, longitude):
+    def locationFilter(term, latitude, longitude, allowedVariance=2.0):
         """
         Check if the record is close to the given latitude and longitude
+        Uses an approximate circle around the requested location.
         """
-        return True
+        _,idxLatitude,idxLongitude = term.split(RainfallRecordIndexFactory.SEPARATOR)
+        if sqrt(pow(latitude - float(idxLatitude),2) +  pow(latitude - float(idxLatitude),2)) <= allowedVariance:
+            return True
+        return False
 
     

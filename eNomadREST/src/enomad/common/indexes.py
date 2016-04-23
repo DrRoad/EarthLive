@@ -10,7 +10,7 @@ SEPARATOR = '|'
 
 class RainfallReadingIndexFactory(object):
     '''
-    classdocs
+    Index Factory which creates the 2i Indexes for the Rainfall Records
     '''
        
     def buildIndexes(self, rainfallRecord):
