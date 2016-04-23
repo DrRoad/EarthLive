@@ -22,6 +22,6 @@ class RainfallReadingIndexFactory(object):
         latitude = str(rainfallRecord.latitude).replace('.','o')
         longitude = str(rainfallRecord.longitude).replace('.','o')
         indexes[INDEX_SEARCH] = SEPARATOR.join([timestamp, latitude, longitude])
-        indexes[INDEX_LOCATION] = SEPARATOR.join(latitude, longitude])
+        indexes[INDEX_LOCATION] = SEPARATOR.join([latitude, longitude])
         return indexes
         

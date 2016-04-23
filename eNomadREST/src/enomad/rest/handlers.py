@@ -15,7 +15,7 @@ class VersionHandler(RequestHandler):
                      'last_build':  date.today().isoformat() }
         self.write(response)
 
-class RainfallHandler(RequestHandler)
+class RainfallHandler(RequestHandler):
     """
     Retrieve the details of the Rainfall Records from the Riak Database
     """
@@ -31,8 +31,7 @@ class RainfallHandler(RequestHandler)
       """
       latitude = float(latitude.replace('o','.'))
       longitude = float(longitude.replace('o','.'))
-      records = self.database.findRainfallRecords(latitude, longitude,
-                                                   start, finish):
+      records = self.database.findRainfallRecords(latitude, longitude, start, finish)
 
       response = { "rainfall" : records }
 

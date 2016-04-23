@@ -8,7 +8,7 @@ from contextlib import closing
 import riak
 import sys
 import traceback
-from enomad.common.indexes import RainfallRecordIndexFactory
+from enomad.common.indexes import RainfallReadingIndexFactory
 
 RAINFALL_BUCKET = 'rainfall'
 
