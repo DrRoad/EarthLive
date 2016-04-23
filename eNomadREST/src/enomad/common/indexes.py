@@ -5,6 +5,7 @@ Created on 23 Apr 2016
 '''
 
 INDEX_SEARCH = "search_bin"
+INDEX_LOCATION = "location_bin"
 SEPARATOR = '|'
 
 class RainfallReadingIndexFactory(object):
@@ -18,8 +19,9 @@ class RainfallReadingIndexFactory(object):
         """
         indexes = []
         timestamp = rainfallRecord.timestamp
-        latitude = rainfallRecord.latitude
-        longitude = rainfallRecord.longitude
+        latitude = str(rainfallRecord.latitude).replace('.','o')
+        longitude = str(rainfallRecord.longitude).replace('.','o')
         indexes[INDEX_SEARCH] = SEPARATOR.join([timestamp, latitude, longitude])
+        indexes[INDEX_LOCATION] = SEPARATOR.join(latitude, longitude])
         return indexes
         
