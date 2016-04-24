@@ -5,6 +5,8 @@ Created on 23 Apr 2016
 '''
 from contextlib import closing
 
+import logging
+
 import riak
 import sys
 import traceback
@@ -23,20 +25,26 @@ class RainfallDatabase(object):
         """
         """
         self.riakClient = riak.RiakClient(host=riakHost, http_port=riakPort)
-        self.bucket = riakClient.bucket(RAINFALL_BUCKET)
-        self.indexFactory = RainfallRecordIndexFactory()
+        self.bucket = self.riakClient.bucket(RAINFALL_BUCKET)
+        self.indexFactory = RainfallReadingIndexFactory()
+        self.logger = logging.getLogger(__name__)
     
     def insertRainfallReading(self, rainfallReading):
         """
         Add a Rainfall Record into the database 
         """
+        storedObject = None
         try:
-            dataObject = self.bucket.new(rainfallReading.key())
+            self.logger.info('Adding Record:' + rainfallReading.key)
+            dataObject = self.bucket.new(rainfallReading.key)
+            self.logger.info('Got Data Object')
             indexes = self.indexFactory.buildIndexes(rainfallReading)
-            value = rainfallReading.metaInfo
-            dataObject.data = value
-            dataObject.indexes = indexes
+            dataObject.data = rainfallReading.value
+            for idxName, idxValue in indexes.iteritems():
+                dataObject.add_index(idxName,str(idxValue))
+            self.logger.info('About to Store Data Object')
             storedObject = dataObject.store(return_body=True)
+            self.logger.info('Stored Data Object')
         except Exception, e:
             exc_type, exc_value, exc_traceback = sys.exc_info()
             traceback.print_exception(exc_type, exc_value, exc_traceback)
@@ -51,9 +59,9 @@ class RainfallDatabase(object):
         records = []
         try:
             # Using contextlib.closing
-            with closing(self.riakClient.stream_index(RAINFALL_BUCKET, RainfallRecordIndexFactory.INDEX_SEARCH,
-                                             startKey=start + RainfallRecordIndexFactory.SEPARATOR + '~',
-                                             endKey=end + RainfallRecordIndexFactory.SEPARATOR + '~',
+            with closing(self.riakClient.stream_index(RAINFALL_BUCKET, RainfallReadingIndexFactory.INDEX_SEARCH,
+                                             startKey=start + RainfallReadingIndexFactory.SEPARATOR + '~',
+                                             endKey=end + RainfallReadingIndexFactory.SEPARATOR + '~',
                                              return_terms=True,
                                              max_results=5000,
                                              timeout=20000)) as index:
@@ -75,7 +83,7 @@ class RainfallDatabase(object):
         Check if the record is close to the given latitude and longitude
         Uses an approximate circle around the requested location.
         """
-        _,idxLatitude,idxLongitude = term.split(RainfallRecordIndexFactory.SEPARATOR)
+        _,idxLatitude,idxLongitude = term.split(RainfallReadingIndexFactory.SEPARATOR)
         if sqrt(pow(latitude - float(idxLatitude),2) +  pow(latitude - float(idxLatitude),2)) <= allowedVariance:
             return True
         return False

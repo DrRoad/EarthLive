@@ -17,11 +17,11 @@ class RainfallReadingIndexFactory(object):
         """
         Create the 2i Index Values for a Rainfall Record
         """
-        indexes = []
+        indexes = {}
         timestamp = rainfallRecord.timestamp
         latitude = str(rainfallRecord.latitude).replace('.','o')
         longitude = str(rainfallRecord.longitude).replace('.','o')
-        indexes[INDEX_SEARCH] = SEPARATOR.join([timestamp, latitude, longitude])
-        indexes[INDEX_LOCATION] = SEPARATOR.join([latitude, longitude])
+        indexes[INDEX_SEARCH] = [SEPARATOR.join([timestamp, latitude, longitude])]
+        indexes[INDEX_LOCATION] = [SEPARATOR.join([latitude, longitude])]
         return indexes
         

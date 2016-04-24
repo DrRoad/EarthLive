@@ -4,6 +4,9 @@ Created on 23 Apr 2016
 @author: Andy
 '''
 
+import logging
+
+
 class RainfallReading(object):
     '''
     classdocs
@@ -12,53 +15,34 @@ class RainfallReading(object):
         '''
         Constructor
         '''
+        self.metaInfo = {}
+        logger = logging.getLogger(__name__)
+        self.timestamp = timestamp
+        self.latitude = latitude
+        self.longitude = longitude
+        self.precipitation = rainfall
+
         if data:
-            self.metaInfo = data
-        else:
-            self.metaInfo = {}
-            self.timestamp = timestamp
-            self.latitude = latitude
-            self.longitude = longitude
-            self.rainfall = rainfall
+            logger.warn("Loading Domain Object")
+            self.timestamp = data.get('timestamp','Missing')
+            self.latitude = data.get('latitude','Missing')
+            self.longitude = data.get('longitude','Missing')
+            self.precipitation = data.get('precipitation',0)
     
     @property
     def key(self):
-        return '|'.join([self.timestamp,self.latitude,self.longitude])
+        keyValues = [self.timestamp,
+                    str(self.latitude),
+                    str(self.longitude)]
+        return '|'.join(keyValues)
 
     @property
     def value(self):
-        return self.metaInfo
-    
-    @property 
-    def timestamp(self):
-        self.metaInfo.get("timestamp")
-        
-    @timestamp.setter
-    def timestamp(self,value):
-        self.metaInfo["timestamp"] = value
+        return  { 'timestamp' : self.timestamp,
+                   'latitude' : self.latitude,
+                   'longitude' : self.longitude,
+                   'precipitation' : self.precipitation }
+ 
 
-    @property
-    def latitude(self):
-        self.metaInfo.get("latitude")
-        
-    @latitude.setter
-    def latitude(self,value):
-        self.metaInfo["latitude"] = value
-
-    @property
-    def longitude(self):
-        self.metaInfo.get("longitude")
-        
-    @longitude.setter
-    def longitude(self,value):
-        self.metaInfo["longitude"] = value
-        
-    @property
-    def rainfall(self):
-        self.metaInfo.get("precipitation")
-        
-    @rainfall.setter
-    def rainfall(self,value):
-        self.metaInfo["precipitation"] = value
-        
+       
         
