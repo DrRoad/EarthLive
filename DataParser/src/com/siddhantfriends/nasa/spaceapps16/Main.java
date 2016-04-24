@@ -16,48 +16,49 @@ public class Main {
     public static List<String> longitude = new ArrayList<>();
     public static List<List<String>> percipitation = new ArrayList<>();
     public static List<List<String>> timeStamp = new ArrayList<>();
+    public static RainfallUploader rainfallUploader = new RainfallUploader();
 
     public static void main(String[] args) {
         // get latitude and longitude
-        File file = new File(LAT_LON);
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
+        File file2 = new File(LAT_LON);
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file2))) {
+            String line2;
 
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                List<String> dataList = Arrays.asList(data);
+            while ((line2 = bufferedReader.readLine()) != null) {
+                String[] data2 = line2.split(",");
+                List<String> dataList = Arrays.asList(data2);
                 if ("lat".equalsIgnoreCase(dataList.get(0))) {
                     latitude = (dataList.subList(1, (dataList.size())));
                 } else if ("lon".equalsIgnoreCase(dataList.get(0))) {
                     longitude = (dataList.subList(1, (dataList.size())));
                 }
             }
-            br.close();
+            bufferedReader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // get percipitation
-        file = new File(PERCIPITATION);
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                List<String> dataList = Arrays.asList(data);
+        file2 = new File(PERCIPITATION);
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file2))) {
+            String line2;
+            while ((line2 = bufferedReader.readLine()) != null) {
+                String[] data2 = line2.split(",");
+                List<String> dataList = Arrays.asList(data2);
                 percipitation.add(dataList.subList(1, dataList.size()));
             }
-            br.close();
+            bufferedReader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         // get timestamp
-        file = new File(TIME_STAMP);
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                List<String> dataList = Arrays.asList(data);
+        file2 = new File(TIME_STAMP);
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file2))) {
+            String line2;
+            while ((line2 = bufferedReader.readLine()) != null) {
+                String[] data2 = line2.split(",");
+                List<String> dataList = Arrays.asList(data2);
                 dataList = dataList.subList(1, dataList.size());
                 for (int i = 0; i < dataList.size(); i++) {
                     String time = dataList.get(i).trim();
@@ -72,7 +73,7 @@ public class Main {
                 }
                 timeStamp.add(dataList);
             }
-            br.close();
+            bufferedReader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -92,8 +93,8 @@ public class Main {
 
 
 
-                    String temp = "{ \"timestamp\": \"\", \"lat\": " + latitude.get(j)
-                            + ", \"lon\": " + longitude.get(i) + ", \"precipitation:\" " + percipitationLonLat + " }";
+                    String temp = "{ \"timestamp\": \"201604241102\", \"latitude\": " + latitude.get(j)
+                            + ", \"longitude\": " + longitude.get(i) + ", \"precipitation\": " + percipitationLonLat + " }";
 
                     if(!temp.trim().equalsIgnoreCase("")) {
                         if (!jsonString.equalsIgnoreCase("[")) {
@@ -106,7 +107,11 @@ public class Main {
 
             jsonString += "]";
             // ToDo - Send Post here
-            System.out.println(jsonString);
+            try {
+                rainfallUploader.uploadJson(jsonString);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
     }
