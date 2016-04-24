@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="com.google.code.maven-play-plugin.org.apache.commons:commons-javaflow:1590792" level="project" />
+    <orderEntry type="library" name="org.seleniumhq.selenium:selenium-java:2.0.0" level="project" />
   </component>
 </module>
