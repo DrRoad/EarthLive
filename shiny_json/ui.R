@@ -23,6 +23,11 @@ shinyUI(fluidPage(
                   min = 1,
                   max = 50,
                   value = 30),
+      sliderInput("zoom",
+                  "Zoom My Map:",
+                  min = 1,
+                  max = 20,
+                  value = 5),
       actionButton("goButton", "Analyse!")),
     
     # Show a plot of the generated distribution

@@ -1,0 +1,3 @@
+save(Cred, file='twitter authentication.Rdata')
+load('twitter authentication.Rdata') #Once you launch the code first time, you can start from this line in the future (libraries should be connected)
+setup_twitter_oauth( consumer_key='yiHz2vJPQmHRIZ3WcAZcbhloY', consumer_secret='N1kGE6Y46z1KETOpUdMD1wqWQLGI35smz4f48k0wa4C4h9kUYv', access_token='2670240956-3D795oeGR2BFIbKqVmn1Fdy2mjINAbnBI1Ks4XU', access_secret='WNcDtRDkI6JPv2QsXq5jJ10AwiiawfQNcJrvhXyNqmWye')
