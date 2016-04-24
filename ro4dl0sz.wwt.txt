@@ -1,0 +1,38 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	new file:   shiny_json/.RData
+#	new file:   shiny_json/.Rhistory
+#	new file:   shiny_json/.Rproj.user/2415402E/pcs/files-pane.pper
+#	new file:   shiny_json/.Rproj.user/2415402E/pcs/source-pane.pper
+#	new file:   shiny_json/.Rproj.user/2415402E/pcs/windowlayoutstate.pper
+#	new file:   shiny_json/.Rproj.user/2415402E/pcs/workbench-pane.pper
+#	new file:   shiny_json/.Rproj.user/2415402E/saved_source_markers
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/per/t/18CBE1A3
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/per/t/22CD4CC5
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/per/t/51E7E54C
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/per/t/6EB03D0F
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/per/t/A7C8F4F8
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/per/t/E65E80E0
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/per/t/F8A02D7
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/prop/148246AE
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/prop/193075D4
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/prop/31D5E71F
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/prop/3A371984
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/prop/3AB538ED
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/prop/C599573
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/prop/E6D795E9
+#	new file:   shiny_json/.Rproj.user/2415402E/sdb/prop/INDEX
+#	new file:   shiny_json/satellite.png
+#	new file:   shiny_json/satellite.png.rda
+#	new file:   shiny_json/server.R
+#	new file:   shiny_json/shiny_json.Rproj
+#	new file:   shiny_json/terrain.png
+#	new file:   shiny_json/terrain.png.rda
+#	new file:   shiny_json/ui.R
+#
+
