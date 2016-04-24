@@ -5,6 +5,7 @@ Created on 23 Apr 2016
 '''
 
 import random
+import json
 from datetime import date
 from tornado.web import RequestHandler
 from enomad.dao.database import RainfallDatabase
@@ -38,6 +39,20 @@ class RainfallHandler(RequestHandler):
 
       self.write(response)
 
+class UploadRecordHandler(RequestHandler):
+  """
+  Insert a Rainfall Record into the database
+  """
+    def __init__(self):
+      self.database = RainfallDatabase()
+
+    def post(self):
+        """
+        Insert record into the database
+        """
+        data = json.loads(self.request.body)
+        rainfallReading = RainfallReading(data=data)
+        database.insertRainfallReading(rainfallReading)
 
 class MockRainfallHandler(RequestHandler):
     """

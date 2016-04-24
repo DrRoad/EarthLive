@@ -8,15 +8,18 @@ class RainfallReading(object):
     '''
     classdocs
     '''
-    def __init__(self, timestamp, latitude, longitude, rainfall):
+    def __init__(self, data=None, timestamp=None, latitude=None, longitude=None, rainfall=0):
         '''
         Constructor
         '''
-        self.metaInfo = {}
-        self.timestamp = timestamp
-        self.latitude = latitude
-        self.longitude = longitude
-        self.rainfall = rainfall
+        if data:
+            self.metaInfo = data
+        else:
+            self.metaInfo = {}
+            self.timestamp = timestamp
+            self.latitude = latitude
+            self.longitude = longitude
+            self.rainfall = rainfall
     
     @property
     def key(self):
@@ -52,10 +55,10 @@ class RainfallReading(object):
         
     @property
     def rainfall(self):
-        self.metaInfo.get("rainfall")
+        self.metaInfo.get("precipitation")
         
     @rainfall.setter
     def rainfall(self,value):
-        self.metaInfo["rainfall"] = value
+        self.metaInfo["precipitation"] = value
         
         
