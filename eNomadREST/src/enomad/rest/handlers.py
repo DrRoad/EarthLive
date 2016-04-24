@@ -4,6 +4,7 @@ Created on 23 Apr 2016
 @author: Andy
 '''
 
+import random
 from datetime import date
 from tornado.web import RequestHandler
 from enomad.dao.database import RainfallDatabase
@@ -44,37 +45,15 @@ class MockRainfallHandler(RequestHandler):
     simulated set of Rainfall Records
     """
     def get(self, latitude, longitude, start, end):
-        response = {
-            "rainfall" : [
-                {
-                "timestamp": "201604131602010000",
-                "latitude": "52.1111",
-                "longitude": "2.6500",
-                "precipitation": "21"
-              },
-              {
-                "timestamp": "201604131602020000",
-                "latitude": "52.2311",
-                "longitude": "2.6500",
-                "precipitation": "20"
-              },
-              {
-                "timestamp": "201604131602030000",
-                "latitude": "52.6511",
-                "longitude": "2.8700",
-                "precipitation": "18"
-              },
-              {
-                "timestamp": "201604131602040000",
-                "latitude": "52.1111",
-                "longitude": "2.4500",
-                "precipitation": "25"
-              },
-              {
-                "timestamp": "201604131602050000",
-                "latitude": "52.1111",
-                "longitude": "2.3000",
-                "precipitation": "33"
-              }
-            ]}
+        records = [] 
+        for i in xrange(100):
+            record = {
+                "timestamp": "201604131602",
+                "latitude": random.randint(52000,53000) / float(1000),
+                "longitude": random.randint(2000,3000) / float(1000),
+                "precipitation": random.randint(0,50)
+            }
+            records.append(record)
+
+        response = { "rainfall" : [records]}
         self.write(response)
