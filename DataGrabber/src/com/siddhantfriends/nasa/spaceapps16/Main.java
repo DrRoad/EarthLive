@@ -34,6 +34,8 @@ public class Main {
         getQueryDataToFile(TIMESTAMP, "TimeStamp.csv");
 
         // Grab date and time
+
+
         WebDriver driver = new ChromeDriver();
         driver.get("http://gpm1.gesdisc.eosdis.nasa.gov/opendap/GPM_L3/GPM_3IMERGHHE.03/2016/001/3B-HHR-E.MS.MRG.3IMERG.20160101-S000000-E002959.0000.V03E.HDF5.html");
         String fullTest = driver.findElement(By.xpath("html/body/form/table/tbody/tr[4]/td[2]/textarea")).getText();

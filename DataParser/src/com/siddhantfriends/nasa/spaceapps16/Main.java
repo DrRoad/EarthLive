@@ -77,6 +77,38 @@ public class Main {
             e.printStackTrace();
         }
 
+
+        // output json
+        StringBuilder jsonBuilder = new StringBuilder();
+        for (int i = 0; i < percipitation.size(); i++) {
+            List<String> percipitationLat = percipitation.get(i);
+            String jsonString = "";
+            jsonString += "[";
+            for (int j = 0; j < percipitationLat.size(); j++) {
+                String percipitationLonLat = percipitationLat.get(j).trim();
+
+                if(!percipitationLonLat.equalsIgnoreCase("-9999.9")) {
+                    // This is the case where you generate all the data
+
+
+
+                    String temp = "{ \"timestamp\": \"\", \"lat\": " + latitude.get(j)
+                            + ", \"lon\": " + longitude.get(i) + ", \"precipitation:\" " + percipitationLonLat + " }";
+
+                    if(!temp.trim().equalsIgnoreCase("")) {
+                        if (!jsonString.equalsIgnoreCase("[")) {
+                            jsonString +=", ";
+                        }
+                        jsonString += temp;
+                    }
+                }
+            }
+
+            jsonString += "]";
+            // ToDo - Send Post here
+            System.out.println(jsonString);
+        }
+
     }
 
 
