@@ -1,0 +1,9 @@
+{
+    "path" : "~/Twitter_Sentiments",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}

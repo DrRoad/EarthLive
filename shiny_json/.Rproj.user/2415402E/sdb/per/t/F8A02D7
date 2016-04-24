@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "library(shiny)\nshinyUI(pageWithSidebar(\n  # Application title\n  headerPanel(\"Twitter Sentiment Analysis\"),\n  sidebarPanel(cellWidths = c(\"25%\", \"75%\"),\n               textInput('term', 'Enter a term', ''),\n               sliderInput(\"maxTweets\",\"Number of bin\",min=5,max=200,value=NULL,step=5),\n               #plotOutput(\"distPlot\",width = \"300%\", height = \"100%\"),\n               actionButton(\"goButton\", \"Analyse!\")),\n  mainPanel(h4('Comparison Cloud'),\n            tabsetPanel(\n              tabPanel(\"Plot\",plotOutput(\"plot\")),\n              tabPanel(\"Tweets\",tableOutput('table'))))\n              #tabPanel(\"Pie Chart\",plotOutput('piechart'))))\n))",
+    "created" : 1461437393435.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "578271644",
+    "id" : "F8A02D7",
+    "lastKnownWriteTime" : 1461438668,
+    "last_content_update" : 1461438668133,
+    "path" : "~/Twitter_Sentiment/ui.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

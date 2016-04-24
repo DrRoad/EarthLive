@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#sample_json <- ' { \"breakfast\" : [ \"milk\", \"fruit loops\", \"juice\" ], \"lunch\" : [ \"left over sushi\" ] } '\n#parser <- newJSONParser()\n#parser$addData( sample_json ) \n#food <- parser$getObject() \n#print( food )\n\n\n#sample_json <- 'http://eonet.sci.gsfc.nasa.gov/api/v2.1/events?source=InciWeb,EO'\n#parser <- newJSONParser()\n#parser$addData( sample_json ) \n#food <- parser$getObject() \n#print( food )\n\ninstall.packages(\"rjson\")\nlibrary(\"rjson\")\njson_file <- \"http://eonet.sci.gsfc.nasa.gov/api/v2.1/events?source=InciWeb,EO\"\nparser <- newJSONParser()\nparser$addData( json_file )\nfood <- parser$getObject() \njson_data <- fromJSON(paste(readLines(json_file), collapse=\"\"))\n",
+    "created" : 1461437255080.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1997189463",
+    "id" : "A7C8F4F8",
+    "lastKnownWriteTime" : 1461434178,
+    "last_content_update" : 1461434178,
+    "path" : "~/simple_JSON/json_simple.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

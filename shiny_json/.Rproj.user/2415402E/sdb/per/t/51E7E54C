@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#\n# This is the server logic of a Shiny web application. You can run the \n# application by clicking 'Run App' above.\n#\n# Find out more about building applications with Shiny here:\n# \n#    http://shiny.rstudio.com/\n#\n\nlibrary(shiny)\n\n# Define server logic required to draw a histogram\nshinyServer(function(input, output) {\n  \n  output$distPlot <- renderPlot({\n    \n    # generate bins based on input$bins from ui.R\n    x    <- faithful[, 2] \n    bins <- seq(min(x), max(x), length.out = input$bins + 1)\n    # draw the histogram with the specified number of bins\n    hist(x, breaks = bins, col = 'darkgray', border = 'white',main=paste(\"Flood Analysis\"),xlab=\"Days Range\",ylab=\"Rainfall Intensity\")\n    \n  })\n  \n})\n",
+    "created" : 1461436569792.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3791918598",
+    "id" : "51E7E54C",
+    "lastKnownWriteTime" : 1461440396,
+    "last_content_update" : 1461440396929,
+    "path" : "~/shiny_json/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
