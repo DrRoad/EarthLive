@@ -1,9 +1,10 @@
-package com.siddhantfriends\nasa\spacesapps16;
+package com.siddhantfriends.nasa.spaceapps16;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * Send HTTP REST Request to upload a Rainfall Record or group of Rainfall Records
@@ -24,8 +25,11 @@ public class RainfallUploader {
 		try {
 			URL obj = new URL(url);
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			String encodedData = URLEncoder.encode(json);
 			con.setRequestMethod("POST");
 			con.setRequestProperty("Content-Type", "application/json");
+			con.setRequestProperty("Content-Length", String.valueOf(json.length()));
+			con.setDoOutput(true);
 			os = con.getOutputStream();
 			os.write(json.getBytes());
 			os.flush();
