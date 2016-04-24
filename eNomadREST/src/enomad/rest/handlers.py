@@ -23,7 +23,7 @@ class RainfallHandler(RequestHandler):
     Retrieve the details of the Rainfall Records from the Riak Database
     """
 
-    def get(self, latitude, longitude, start, end):
+    def get(self, latitude, longitude, start, end, threshold=15):
       """
       Find all of the Rainfall Records that exist between the Start & End Date that
       are close to the given latitude and longitude.
@@ -32,8 +32,8 @@ class RainfallHandler(RequestHandler):
       latitude = float(latitude.replace('o','.'))
       longitude = float(longitude.replace('o','.'))
       records = database.findRainfallRecords(latitude, longitude, start, finish)
-
-      response = { "rainfall" : records }
+      # Only show records with precipitation > threshold
+      response = { "rainfall" : [record for records if record.precipitation >= threshold ]}
 
       self.write(response)
 
