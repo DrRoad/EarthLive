@@ -51,8 +51,13 @@ class UploadRecordHandler(RequestHandler):
         Insert record into the database
         """
         data = json.loads(self.request.body)
-        rainfallReading = RainfallReading(data=data)
-        database.insertRainfallReading(rainfallReading)
+        if data not isinstance():
+          rainfallReadings = [data]
+        else:
+          rainfallReadings = data
+        for entry in rainfallReadings:
+            rainfallReading = RainfallReading(data=entry)
+            database.insertRainfallReading(rainfallReading)
 
 class MockRainfallHandler(RequestHandler):
     """
